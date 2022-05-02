@@ -19,10 +19,21 @@ use App\Http\Controllers\SearchController;
 //Без авторизации
 Route::get('/profiles', [CustomerController::class, 'allCustomers']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 Route::get('/get-storages-id', [SearchController::class, 'getStoragesId']);
 Route::post('/search', [SearchController::class, 'searchByArticle']);
 
 //Требуют авторизации
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile/{id}', [CustomerController::class, 'byId']);
+
+    Route::get('/profile', function (Request $request) {
+        $customer = [
+            "id" => $request->user()->id,
+            "email" => $request->user()->login,
+            "name" => $request->user()->name,
+            "is_admin" => $request->user()->is_admin
+        ];
+        return $customer;
+    });
+    Route::get("/logout", [AuthController::class, 'logout']);
 });
