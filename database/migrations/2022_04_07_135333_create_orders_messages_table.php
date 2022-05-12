@@ -18,6 +18,8 @@ class CreateOrdersMessagesTable extends Migration
             $table->foreignId('order_id')->constrained('orders');
             $table->string('text');
             $table->boolean('is_customer');
+            $table->string('user_name');
+            $table->boolean('view');
             $table->timestamps();
         });
     }

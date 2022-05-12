@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeliveriesTable extends Migration
+class CreateStorageOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateDeliveriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('deliveries', function (Blueprint $table) {
+        Schema::create('storage_options', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('storage_id')->constrained('storages');
+            $table->string('option_name');
+            $table->string('option_type');
+            $table->string('option_value');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateDeliveriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deliveries');
+        Schema::dropIfExists('storage_options');
     }
 }

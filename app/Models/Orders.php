@@ -21,10 +21,7 @@ class Orders extends Model
     function status() {
         return $this->belongsTo(OrdersStatuses::class, 'status_id');
     }
-
-    function delivery() {
-        return $this->belongsTo(Delivery::class, 'delivery_id');
-    }
+    
 
     function messages() {
         $this->hasMany(OrdersMessages::class, 'order_id');

@@ -15,12 +15,9 @@ class CreateStoragesTable extends Migration
     {
         Schema::create('storages', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
+            $table->string('title');
             $table->integer('margin');
             $table->boolean('active')->default(0);
-            $table->json('json_connection_params');
-
-            $table->foreignId('type_id')->constrained('storages_types');
             $table->timestamps();
         });
     }

@@ -19,8 +19,7 @@ class SearchController extends Controller
     {
         //$storage_options = Storages::getConnectionOptions( $request['id'] );
         $storages = Storages::find( $request->id );
-        $type = $storages->type()->get();
-        $class = $type[0]->title;
+        $class = $storages->title;
         $storage = StoragesFactory::make($class);
         $storage->authenticate();
         $storage->getProducts( $request->article );

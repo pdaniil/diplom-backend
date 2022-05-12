@@ -16,11 +16,10 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->dateTime('receive_time');
-            $table->boolean('chat_created')->default(0);
-            $table->foreignId('delivery_id')->constrained('deliveries');
+            $table->string('delivery');
+            $table->string('payment');
             $table->foreignId('customer_id')->constrained('customers');
-            $table->foreignId('status_id')->constrained('orders_statuses');
-
+            $table->foreignId('status_id')->constrained('orders_statuses')->default(1);
             $table->timestamps();
         });
     }

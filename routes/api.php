@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\OrdersItemsController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\StoragesController;
+use App\Http\Controllers\StoragesTypesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,4 +41,23 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return $customer;
     });
     Route::get("/logout", [AuthController::class, 'logout']);
+
+
+    Route::post("/order/create", [OrdersController::class, 'create']);
+    Route::post("/order/items/create", [OrdersItemsController::class, 'create']);
+
+    Route::get("/orders", [OrdersController::class, 'getOrders']);
+    Route::get("/orders_items/{order_id}", [OrdersItemsController::class, 'getItems']);
+
+
+    Route::post("/new_message", [MessageController::class, 'createMessage']);
+    Route::get("/chat/{order_id}", [MessageController::class, 'getChat']);
+    Route::get("/chat_list/{user_id}", [MessageController::class, 'getChatListByUserId']);
+
+    Route::get("/admin/storages", [StoragesController::class, 'getStorages']);
+    Route::post("/admin/create_storage", [StoragesController::class, 'createStorage']);
+    Route::get("/admin/storages_types", [StoragesTypesController::class, 'getStoragesTypes']);
+    Route::get("/admin/chat_list", [MessageController::class, 'getChatListForAdmin']);
+
+    Route::post("/set_view_messages", [MessageController::class, 'setMessagesView']);
 });

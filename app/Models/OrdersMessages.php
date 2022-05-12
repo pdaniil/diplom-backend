@@ -13,8 +13,4 @@ class OrdersMessages extends Model
     function order() {
         return $this->belongsTo(Order::class, 'order_id');
     }
-
-    function docs() {
-        return $this->hasMany(OrdersMessagesDocs::class, 'message_id');
-    }
 }
